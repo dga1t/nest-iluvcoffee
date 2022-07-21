@@ -14,7 +14,7 @@ describe('CoffeesService', () => {
         CoffeesService,
         { provide: Connection, useValue: {} },
         { provide: getRepositoryToken(Flavor), useValue: {} },
-        { provide: getRepositoryToken(Coffee), useValue: {} }
+        { provide: getRepositoryToken(Coffee), useValue: {} },
       ],
     }).compile();
 
@@ -23,5 +23,20 @@ describe('CoffeesService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  describe('findOne', () => {
+    describe('when coffee with ID exists', () => {
+      it('should return the coffee object', async () => {
+        const coffeeId = '1';
+        const expectedCoffee = {};
+
+        const coffee = await service.findOne(coffeeId);
+        expect(coffee).toEqual(expectedCoffee);
+      });
+    });
+    describe('otherwise', () => {
+      it('should throw the "NotFoundException"', () => {});
+    });
   });
 });
