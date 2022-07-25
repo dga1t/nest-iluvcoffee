@@ -18,7 +18,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "pre-test:e2e": "docer-compose up -d test-db",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "post-test:e2e": "docer-compose stop test-db && docer-compose rm -f test-db"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
