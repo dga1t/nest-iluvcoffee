@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -19,6 +20,7 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new WrapResponseInterceptor(), new TimeoutInterceptor())
   app.useGlobalFilters(new HttpExceptionFilter());
+  
   await app.listen(3000);
 }
 bootstrap();
